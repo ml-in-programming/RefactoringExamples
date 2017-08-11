@@ -1091,6 +1091,7 @@ public class FTPClient {
 	 *             If the server refuses the QUIT command (can be thrown only if
 	 *             sendQuitCommand is true).
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void disconnect(boolean sendQuitCommand)
 			throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
@@ -1405,6 +1406,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If login fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void noop() throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1443,6 +1445,7 @@ public class FTPClient {
 	 * @throws FTPIllegalReplyException
 	 *             If the server replies in an illegal way.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public FTPReply sendCustomCommand(String command)
 			throws IllegalStateException, IOException, FTPIllegalReplyException {
 		synchronized (lock) {
@@ -1473,6 +1476,7 @@ public class FTPClient {
 	 * @throws FTPIllegalReplyException
 	 *             If the server replies in an illegal way.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public FTPReply sendSiteCommand(String command)
 			throws IllegalStateException, IOException, FTPIllegalReplyException {
 		synchronized (lock) {
@@ -1505,6 +1509,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If login fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void changeAccount(String account) throws IllegalStateException,
 			IOException, FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1588,6 +1593,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void changeDirectory(String path) throws IllegalStateException,
 			IOException, FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1621,6 +1627,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void changeDirectoryUp() throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1704,6 +1711,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public long fileSize(String path) throws IllegalStateException,
 			IOException, FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1762,6 +1770,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void rename(String oldPath, String newPath)
 			throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
@@ -1805,6 +1814,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void deleteFile(String path) throws IllegalStateException,
 			IOException, FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1840,6 +1850,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void deleteDirectory(String path) throws IllegalStateException,
 			IOException, FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1875,6 +1886,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public void createDirectory(String directoryName)
 			throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
@@ -1911,6 +1923,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public String[] help() throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
@@ -1947,6 +1960,7 @@ public class FTPClient {
 	 * @throws FTPException
 	 *             If the operation fails.
 	 */
+	// TODO move to FTPCommunicationChannel
 	public String[] serverStatus() throws IllegalStateException, IOException,
 			FTPIllegalReplyException, FTPException {
 		synchronized (lock) {
