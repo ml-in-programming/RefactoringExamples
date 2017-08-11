@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Ryan M. Matson and Jason Timpe Almost entirely [Tim Still on story/design/lazy couch sitting]
+Main-Class: name_pending.namifest.MF
