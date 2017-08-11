@@ -17,14 +17,14 @@
 
 | Member                                                        | Move to       |
 |---------------------------------------------------------------|---------------|
+| Resistance.checkResistance(Being, String)                     | Being         |
+| ItemWeapon.fireProjectile(Point, int, String, boolean, Being) | Being         |
+| Game.addText(ConsoleWindow)                                   | ConsoleWindow |
 | PlayerData.getItems(Inventory)                                | Inventory     |
 | PlayerData.getType(Item)                                      | Item          |
-| ItemWeapon.fireProjectile(Point, int, String, boolean, Being) | Being         |
-| Entity.collidesWith(Sprite, Sprite, boolean)                  | Sprite        |
-| Game.playerData                                               | Player        |
-| Game.addText(ConsoleWindow)                                   | ConsoleWindow |
 | Game.getPlayerData()                                          | Player        |
-| Resistance.checkResistance(Being, String)                     | Being         |
+| Game.playerData                                               | Player        |
+| Entity.collidesWith(Sprite, Sprite, boolean)                  | Sprite        |
 
 ## FTP4J
 | Member                             | Move to                 |
