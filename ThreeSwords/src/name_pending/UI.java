@@ -57,7 +57,7 @@ public class UI {
 	
 	private void drawPlayerStuff(Graphics g, Player player)
 	{
-		PlayerData playerData = Player.getPlayerData(theGame);
+		PlayerData playerData = theGame.getPlayerData();
 		int frameWidth = theGame.getFrame().getWidth();
 		//int frameHeight = theGame.getFrame().getHeight();
 		//Draw player related HUD
@@ -89,7 +89,7 @@ public class UI {
 		//g.drawString("Level: " + Integer.toString(getTheGame().getPlayerData().getLevel()), frameWidth-100, 20);
 		//g.setColor(Color.white);
 		g.setXORMode(Color.red);
-		g.drawString("Level " + Integer.toString(Player.getPlayerData(getTheGame()).getLevel()), expbarX + 1, expbarY + 11);
+		g.drawString("Level " + Integer.toString(getTheGame().getPlayerData().getLevel()), expbarX + 1, expbarY + 11);
 		g.setPaintMode();
 		
 		//Health bar
@@ -97,11 +97,11 @@ public class UI {
 		int healthbarY = 20;
 		int healthbarWidth = 100;
 		int healthWidth = 0;
-		int healthPercent = (int) ( ( (float) theGame.getPlayer().getHealth() / (float) Player.getPlayerData(theGame).getMaxHealth() ) * 100);
+		int healthPercent = (int) ( ( (float) theGame.getPlayer().getHealth() / (float) theGame.getPlayerData().getMaxHealth() ) * 100);
 		if(getTheGame().getPlayer().getHealth() == 0) //avoid dividing by zero
 			healthWidth = 0;
 		else
-			healthWidth = (int) ( ( (float) theGame.getPlayer().getHealth() / (float) Player.getPlayerData(theGame).getMaxHealth() ) * healthbarWidth);
+			healthWidth = (int) ( ( (float) theGame.getPlayer().getHealth() / (float) theGame.getPlayerData().getMaxHealth() ) * healthbarWidth);
 		g.setColor(Color.RED);
 		g.fillRect(healthbarX, healthbarY, healthbarWidth, 12);
 		g.setColor(Color.GREEN);
@@ -119,11 +119,11 @@ public class UI {
 		int fatiguebarY = 35;
 		int fatiguebarWidth = 100;
 		int fatigueWidth = 0;
-		int fatiguePercent = (int) ( ( (float) Player.getPlayerData(theGame).getFatigue() / (float) Player.getPlayerData(theGame).getMaxFatigue() ) * 100);
-		if(Player.getPlayerData(getTheGame()).getFatigue() == 0) //avoid dividing by zero
+		int fatiguePercent = (int) ( ( (float) theGame.getPlayerData().getFatigue() / (float) theGame.getPlayerData().getMaxFatigue() ) * 100);
+		if(getTheGame().getPlayerData().getFatigue() == 0) //avoid dividing by zero
 			fatigueWidth = 0;
 		else
-			fatigueWidth = (int) ( ( (float) Player.getPlayerData(theGame).getFatigue() / (float) Player.getPlayerData(theGame).getMaxFatigue() ) * fatiguebarWidth);
+			fatigueWidth = (int) ( ( (float) theGame.getPlayerData().getFatigue() / (float) theGame.getPlayerData().getMaxFatigue() ) * fatiguebarWidth);
 		g.setColor(Color.BLUE);
 		g.fillRect(fatiguebarX, fatiguebarY, fatiguebarWidth, 12);
 		g.setColor(Color.YELLOW);

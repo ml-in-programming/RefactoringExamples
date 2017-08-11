@@ -63,7 +63,8 @@ public class Game
 	
 	//Manages all the windows in the game
 	private GameWindowManager gameWindowManager;
-	
+
+	// TODO move to Player
 	//This will hold all the important data for players
 	public PlayerData playerData = new PlayerData(this);
 	
@@ -84,6 +85,11 @@ public class Game
 	{
 		consoleWindow.console.append("\n>>" + s);
 	}
+
+	// TODO move to Player
+    public PlayerData getPlayerData() {
+        return playerData;
+    }
 
 	//Launch when the game starts
 	public void go()

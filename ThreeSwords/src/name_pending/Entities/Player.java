@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.HashSet;
 
-import name_pending.DataBanks.PlayerData;
 import name_pending.Game;
 import name_pending.Sprite;
 import name_pending.DataBanks.ResourceDataBank;
@@ -29,14 +28,9 @@ public class Player extends Being{
 	@SuppressWarnings("static-access")
 	public Player(Game theGame, int x, int y)
 	{
-		super(theGame, x, y, getPlayerData(theGame).getSTARTING_SPEED(), getPlayerData(theGame).getSTARTING_NAME(), getPlayerData(theGame).getMaxHealth(), getPlayerData(theGame).getSTARTING_DEFENCE(), getPlayerData(theGame).getSTARTING_ATTACK(), getPlayerData(theGame).getSTARTING_DEXTERITY(), getPlayerData(theGame).getSTARTING_RESISTANCE());
+		super(theGame, x, y, theGame.getPlayerData().getSTARTING_SPEED(), theGame.getPlayerData().getSTARTING_NAME(), theGame.getPlayerData().getMaxHealth(), theGame.getPlayerData().getSTARTING_DEFENCE(), theGame.getPlayerData().getSTARTING_ATTACK(), theGame.getPlayerData().getSTARTING_DEXTERITY(), theGame.getPlayerData().getSTARTING_RESISTANCE());
 		this.setFriendly(true);
 	}
-
-	// TODO move to Game
-    public static PlayerData getPlayerData(Game game) {
-        return game.playerData;
-    }
 
 	/*
 	 * Entity methods
@@ -73,10 +67,10 @@ public class Player extends Being{
 				{
 					ItemDrop id = (ItemDrop) e;
 					//see if we have room in our inventory
-					if(!(getPlayerData(getTheGame()).getInventory().isFull()))
+					if(!(getTheGame().getPlayerData().getInventory().isFull()))
 					{
 						//Delete drop and add it's item to inventory < reverse that
-						getPlayerData(this.getTheGame()).getInventory().addItem(id.getItem());
+						this.getTheGame().getPlayerData().getInventory().addItem(id.getItem());
 						id.onDelete();
 
 						//Update our inventory with the new item
@@ -94,7 +88,7 @@ public class Player extends Being{
 		//Draw this before the player so it is drawn behind it
 		//if equip then draw the item equip
 		Sprite weaponSprite = null;
-		ItemRanged rangedWeapon = (ItemRanged) getPlayerData(this.getTheGame()).getRangedWeapon();
+		ItemRanged rangedWeapon = (ItemRanged) this.getTheGame().getPlayerData().getRangedWeapon();
 		if(rangedWeapon != null)
 		{
 			weaponSprite = rangedWeapon.getSprite().clone();
@@ -108,7 +102,7 @@ public class Player extends Being{
 		super.paintMe(g);
 		
 		
-		ItemMelee meleeWeapon = (ItemMelee) getPlayerData(this.getTheGame()).getMeleeWeapon();
+		ItemMelee meleeWeapon = (ItemMelee) this.getTheGame().getPlayerData().getMeleeWeapon();
 		weaponSprite = null;
 		if(meleeWeapon != null)
 		{
@@ -134,7 +128,7 @@ public class Player extends Being{
 				{
 					if(isShootingMelee())
 					{
-						ItemMelee meleeWeapon = (ItemMelee) getPlayerData(getTheGame()).getMeleeWeapon();
+						ItemMelee meleeWeapon = (ItemMelee) getTheGame().getPlayerData().getMeleeWeapon();
 						int newX = getTheGame().getGameArea().getOriginPoint().x + mousePoint.x;
 						int newY = getTheGame().getGameArea().getOriginPoint().y + mousePoint.y;
 						
@@ -146,7 +140,7 @@ public class Player extends Being{
 					}
 					if(isShootingRanged())
 					{
-						ItemRanged rangedWeapon = (ItemRanged) getPlayerData(getTheGame()).getRangedWeapon();
+						ItemRanged rangedWeapon = (ItemRanged) getTheGame().getPlayerData().getRangedWeapon();
 						int newX = getTheGame().getGameArea().getOriginPoint().x + mousePoint.x;
 						int newY = getTheGame().getGameArea().getOriginPoint().y + mousePoint.y;
 						rangedWeapon.fireProjectile(new Point(newX, newY), 66, "Arrow.png", true, Player.this);
@@ -161,7 +155,7 @@ public class Player extends Being{
 			setAttackDelay(getAttackDelay() - 1);
 		
 		if(getTheGame().isDEBUG())
-			getPlayerData(getTheGame()).addExp(1);
+			getTheGame().getPlayerData().addExp(1);
 	}
 
 	public void keyCheck(int keyCode,boolean pressed)
@@ -263,7 +257,7 @@ public class Player extends Being{
 		{
 			if(eventType == "pressed")
 			{
-				ItemRanged rangedWeapon = (ItemRanged) getPlayerData(getTheGame()).getRangedWeapon();
+				ItemRanged rangedWeapon = (ItemRanged) getTheGame().getPlayerData().getRangedWeapon();
 				if(rangedWeapon != null)
 				{
 					setShootingRanged(true);
@@ -278,7 +272,7 @@ public class Player extends Being{
 		{
 			if(eventType == "pressed")
 			{
-				ItemMelee meleeWeapon = (ItemMelee) getPlayerData(getTheGame()).getMeleeWeapon();
+				ItemMelee meleeWeapon = (ItemMelee) getTheGame().getPlayerData().getMeleeWeapon();
 				if(meleeWeapon != null)
 				{
 					setShootingMelee(true);

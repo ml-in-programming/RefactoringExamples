@@ -40,7 +40,7 @@ public class GameWindowInventory extends GameWindow {
 		int starty = getY() - 15;
 		int drawx = startx;
 		int drawy = starty;
-		Inventory inventory = Player.getPlayerData(theGame).getInventory();
+		Inventory inventory = theGame.getPlayerData().getInventory();
 		Item item = null;
 		for(int i=0; i<inventory.getMaxSize(); i++)
 		{
@@ -211,7 +211,7 @@ public class GameWindowInventory extends GameWindow {
 			{
 				if(PlayerData.getType(item) == "meleeweapon")
 				{
-					PlayerData pd = Player.getPlayerData(this.getParentWindow().theGame);
+					PlayerData pd = this.getParentWindow().theGame.getPlayerData();
 					Item equipedItem = pd.getMeleeWeapon();
 					pd.setMeleeWeapon(item);
 					PlayerData.getItems(pd.getInventory()).remove(item);
@@ -221,7 +221,7 @@ public class GameWindowInventory extends GameWindow {
 				}
 				if(PlayerData.getType(item) == "rangedweapon")
 				{
-					PlayerData pd = Player.getPlayerData(this.getParentWindow().theGame);
+					PlayerData pd = this.getParentWindow().theGame.getPlayerData();
 					Item equipedItem = pd.getRangedWeapon();
 					pd.setrangedWeapon(item);
 					PlayerData.getItems(pd.getInventory()).remove(item);
