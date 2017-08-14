@@ -43,3 +43,14 @@
 | FTPClient.sendSiteCommand(String)  | FTPCommunicationChannel |
 | FTPClient.rename(String,String)    | FTPCommunicationChannel |
 | FTPClient.serverStatus()           | FTPCommunicationChannel |
+
+## Siden
+| Member                                                    | Move to      |
+|-----------------------------------------------------------|--------------|
+| App.add(AppDef, Predicate, Filter)                        | AppDef       |
+| App.add(AppDef, String, Predicate, WebSocketFactory)      | AppDef       |
+| App.add(AppDef, HttpMethod, String, Route)                | AppDef       |
+| App.add(AppDef, String, PathPredicate, HttpMethod, Route) | AppDef       |
+| App.add(AppDef, HttpMethod, Pattern, Route)               | AppDef       |
+| WebSocketTracker.toMetrics(RequestMeter)                  | RequestMeter |
+| RoutingHandler.addTo(OptionMap, RoutingDef)               | RoutingDef   |
