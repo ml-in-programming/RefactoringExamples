@@ -54,3 +54,17 @@
 | App.add(AppDef, HttpMethod, Pattern, Route)               | AppDef       |
 | WebSocketTracker.toMetrics(RequestMeter)                  | RequestMeter |
 | RoutingHandler.addTo(OptionMap, RoutingDef)               | RoutingDef   |
+
+## LegacyLauncher
+| Member                                                          | Move to                 |
+|-----------------------------------------------------------------|-------------------------|
+| ConsoleFrame.initComponents(ErrorDialog)                        | ErrorDialog             |
+| StartupParameters.runGame(GameLauncher, String, String, String) | GameLauncher            |
+| UpdateThread.getBinCacheDir(SpoutcraftDirectories)              | SpoutcraftDirectories   |
+| UpdateThread.getBinDir(SpoutcraftDirectories)                   | SpoutcraftDirectories   |
+| UpdateThread.getSpoutcraftDir(SpoutcraftDirectories)            | SpoutcraftDirectories   |
+| UpdateThread.getUpdateDir(SpoutcraftDirectories)                | SpoutcraftDirectories   |
+| Proxy.setupProxy(StartupParameters)                             | StartupParameters       |
+| UpdateThread.isIgnoreMD5(StartupParameters)                     | StartupParameters       |
+| GameUpdater.setDownloadListener(UpdateThread, DownloadListener) | UpdateThread            |
+| LoginFrame.getSavedPassword(String)                             | UserPasswordInformation |
