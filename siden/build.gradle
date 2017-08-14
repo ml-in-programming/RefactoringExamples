@@ -1,0 +1,151 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+		classpath 'com.netflix.nebula:gradle-info-plugin:2.2.0'
+	}
+}
+
+apply plugin: 'idea'
+
+configure(subprojects) {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'nebula.info'
+	
+	group = 'ninja.siden'
+	version = "0.6.0"
+
+	sourceCompatibility = targetCompatibility = 1.8
+	tasks.withType(SourceTask).findAll { it.hasProperty('options') } *.options*.encoding = 'UTF-8'
+
+	repositories.mavenCentral()
+
+	dependencies {
+		compile 'io.undertow:undertow-core:1.2.8.Final'
+		testCompile 'junit:junit:4.+'
+		testCompile 'org.jmockit:jmockit:1.+'
+		testCompile 'org.apache.httpcomponents:httpcomponents-client:4.3.+'
+		testCompile 'org.apache.httpcomponents:httpmime:4.3.+'
+	}
+	
+	test {
+		systemProperty("java.awt.headless", "true")
+	}
+
+	eclipse {
+		classpath {
+			containers = [
+				'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+			]
+		}
+	}
+}
+
+configure([project("siden-core"), project("siden-react")]) {
+	task sourcesJar(type: Jar, dependsOn: classes) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+	}
+
+	task javadocJar(type: Jar) {
+		classifier = "javadoc"
+		from javadoc
+	}
+
+	artifacts {
+		archives sourcesJar
+		archives javadocJar
+	}
+
+	apply plugin: 'maven-publish'
+	apply plugin: 'com.jfrog.bintray'
+	
+	def mypom = {
+		scm {
+			url 'https://github.com/taichi/siden'
+		}
+		licenses {
+			license {
+				name "The Apache Software License, Version 2.0"
+				url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+				distribution "repo"
+			}
+		}
+		developers {
+			developer {
+				id "taichi"
+				name "SATO Taichi"
+				email "ryushi@gmail.com"
+			}
+		}
+	}
+
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				from components.java
+				
+				artifact sourcesJar
+				artifact javadocJar
+				
+				pom.withXml {
+					def root = asNode()
+					root.children().last() + mypom
+				}
+			}
+		}
+	}
+
+	bintray {
+		user = project.hasProperty('bintrayUsername') ? project.getProperty('bintrayUsername') : null
+		key =  project.hasProperty('bintrayAPIKey') ? project.getProperty('bintrayAPIKey') : null
+		publications = ['mavenJava']
+		pkg {
+			repo = 'maven'
+			name = 'siden'
+			licenses = ['Apache-2.0']
+		}
+	}
+}
+
+task install(dependsOn: ['siden-core:publishToMavenLocal', 'siden-react:publishToMavenLocal']) << {
+	logger.info "Installing $project.name"
+}
+
+task release(dependsOn: ['siden-core:bintrayUpload', 'siden-react:bintrayUpload']) << {
+	logger.info "Upload to bintray"
+}
+
+project("siden-react") {
+	dependencies {
+		compile project(":siden-core")
+		compile 'org.webjars:react:0.12.1'
+	}
+}
+
+project("siden-example") {
+	dependencies {
+		compile project(":siden-core")
+		compile project(":siden-react")
+		compile "io.fastjson:boon:0.30"
+		compile 'ch.qos.logback:logback-classic:1.1.2'
+		compile "com.github.jknack:handlebars:2.0.0"
+		compile "com.github.spullara.mustache.java:compiler:0.8.17"
+	}
+}
+
+project("siden-sandbox") {
+	dependencies {
+		compile project(":siden-core")
+		compile "io.fastjson:boon:0.30"
+		compile 'com.zaxxer:HikariCP:2.2.5'
+		compile("org.jooq:jool:0.9.3") {
+			exclude group: 'org.scala-lang'
+		}
+	}
+}
+

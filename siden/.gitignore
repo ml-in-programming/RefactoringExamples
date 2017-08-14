@@ -1,0 +1,16 @@
+.gradle
+/build
+*/build
+gradle.properties
+
+*/bin
+*.project
+*.classpath
+*.settings
+*.factorypath
+*.generated
+
+.idea
+*.ipr
+*.iws
+*.iml
